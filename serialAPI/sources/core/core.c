@@ -77,6 +77,17 @@
 	/**	@}
 	 */
 
+	const ParameterReferenceInfo_t motor_DataReferenceInfoArray [] =
+	{
+		PARAM_BLOCK_(	"Motor Power", 				_SIGNED_SHORT_				),	// 0
+		PARAM_BLOCK_(	"Motor Current",			_UNSIGNED_SHORT_			),	// 1
+		PARAM_BLOCK_(	"Motor Temp",				_SIGNED_CHAR_				),	// 2
+		PARAM_BLOCK_(	"Motor Flags",				_UNSIGNED_SHORT_			),	// 3
+		PARAMS_BLOCK_(	"Reserved",					_UNSIGNED_CHAR_,		6 	),	// 4
+	};
+
+	const ui8 motor_DataReferenceInfoArrayElCnt = countof_(motor_DataReferenceInfoArray);
+
 #endif
 
 
@@ -576,6 +587,11 @@ TxRxStatus_t SBGC32_FindCommand (GeneralSBGC_t *generalSBGC, SerialCommand_t *se
 				case PM_MOTOR_4_CONTROL :
 					*buffArr = motor4_ControlReferenceInfoArray;
 					return motor4_ControlReferenceInfoArrayElCnt;
+					break;
+
+				case PM_MOTOR_DATA_CONTROL :
+					*buffArr = motor_DataReferenceInfoArray;
+					return motor_DataReferenceInfoArrayElCnt;
 					break;
 
 				#if (SBGC_CONTROL_MODULE)

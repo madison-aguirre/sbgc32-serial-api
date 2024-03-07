@@ -430,6 +430,17 @@ TxRxStatus_t SBGC32_RequestRealTimeDataCustom (GeneralSBGC_t *generalSBGC, RealT
 					realTimeDataCustom->IMU_AnglesRad[AXIS_Y] = ReadLong(&cmd);
 					realTimeDataCustom->IMU_AnglesRad[AXIS_Z] = ReadLong(&cmd);
 					break;
+					
+							case RTDCF_SYSTEM_POWER_STATE :
+								ReadBuff(&cmd, &realTimeDataCustom->MotorData_r, sizeof(MotorData_t), PM_MOTOR_DATA_CONTROL);
+								ReadBuff(&cmd, &realTimeDataCustom->MotorData_p, sizeof(MotorData_t), PM_MOTOR_DATA_CONTROL);
+								ReadBuff(&cmd, &realTimeDataCustom->MotorData_y, sizeof(MotorData_t), PM_MOTOR_DATA_CONTROL);
+								realTimeDataCustom->SYSTEM_POWER_STATE = ReadByte(&cmd);
+								realTimeDataCustom->BATTERY_VOLTAGE = ReadWord(&cmd);
+								realTimeDataCustom->TOTAL_CURRENT = ReadWord(&cmd);
+								realTimeDataCustom->SYSTEM_FLAGS = ReadWord(&cmd);
+								break;
+
 			}
 		}
 	}

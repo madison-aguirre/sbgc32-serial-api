@@ -377,6 +377,7 @@ typedef enum
 	PM_CALIB_INFO,									/*!<  See @ref calibInfoReferenceInfoArray											*/
 	PM_AHRS_DEBUG_INFO,								/*!<  See @ref AHRS_DebugInfoReferenceInfoArray										*/
 	PM_MOTOR_4_CONTROL,								/*!<  See @ref motor4_ControlReferenceInfoArray										*/
+	PM_MOTOR_DATA_CONTROL,							/*!<  See @ref motor_DataReferenceInfoArray											*/
 	PM_CONTROL,										/*!<  See @ref controlReferenceInfoArray											*/
 	PM_CONTROL_CONFIG,								/*!<  See @ref controlConfigReferenceInfoArray										*/
 	PM_EXT_IMU_DEBUG_INFO,							/*!<  See @ref extIMU_DebugInfoReferenceInfoArray									*/
@@ -976,6 +977,37 @@ typedef struct __PACKED__
 														  with the FF_SPEED mixed, scaled by the 'scale factor' parameter				*/
 
 }			Motor4_Control_t;
+
+/** @brief Type of structure provides data 
+ * 			on a motor for the system 
+ * 			power state
+ *  					
+ * 
+ */
+
+typedef struct __PACKED__
+{
+	i16     MOT_POWER;
+    ui16    MOT_CURRENT;
+    i8      MOT_TEMP;
+    ui16    MOT_FLAGS;
+    ui8     MOT_RESERVED[6];
+
+}			MotorData_t;
+
+/** @brief Type of structure that provides system power state for 
+ * 			realtime custom data
+* 
+*/
+
+typedef struct __PACKED__
+{
+	MotorData_t     MotorData[3];
+    i8              SYSTEM_POWER_STATE;
+    ui16            BATTERY_VOLTAGE,
+                    TOTAL_CURRENT,
+                    SYSTEM_FLAGS;
+}					System_PowerState_t;
 
 
 #if (SYS_BIG_ENDIAN || SBGC_REF_INFO)
